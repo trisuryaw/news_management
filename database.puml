@@ -1,0 +1,36 @@
+@startuml
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table(users){
+    primary_key(id): INT
+    column(name): VARCHAR
+    column(role): ENUM
+    column(created_at): DATETIME
+    column(updated_at): DATETIME
+}
+
+table(news){
+    primary_key(id): INT
+    foreign_key(user_id): INT
+    column(title): VARCHAR
+    column(content): VARCHAR
+    column(image): VARCHAR
+    column(created_at): DATETIME
+    column(updated_at): DATETIME
+}
+
+table(comments){
+    primary_key(id): INT
+    foreign_key(news_id)
+    foreign_key(user_id): INT
+    column(text): VARCHAR
+    column(created_at): DATETIME
+    column(updated_at): DATETIME
+}
+
+users "1" ||--|{ "m" news
+news "1" ||--|{ "m" comments
+@enduml

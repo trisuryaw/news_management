@@ -1,0 +1,73 @@
+openapi: "3.0.0"
+info:
+  title: News Management API
+  description: description
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1/api
+
+paths:
+  /news:
+    get:
+      summary: Return a list of news
+      responses:
+        '200':
+          description: A JSON array of news
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  string
+
+  /news/create:
+    post:
+      summary: Create a news
+      requestBody:
+        required: true
+        content:
+          image/*:
+            schema:
+              type: string
+              format: binary
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        200:
+          description: Created
+
+  /news/update/{id}:
+    put:
+      summary: Update a news
+      requestBody:
+        required: true
+        content:
+          image/*:
+            schema:
+              type: string
+              format: binary
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        200:
+          description: Updated
+
+  /news/delete/{id}:
+    delete:
+      summary: Delete a news
+      responses:
+        200:
+          description: Deleted
